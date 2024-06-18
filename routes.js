@@ -87,4 +87,28 @@ router.get('/sessao/:idU', async (req, res)=>{
     }
 })
 
+router.post('/sessao/nova', async(req, res)=>{
+    try{
+        const {idu,ids} = req.body;
+        console.log(idu,ids)
+            await pool.query`insert into usuario_sessao values(${idu},${ids})`
+            return res.status(200).json('Cadastrado com sucesso')
+        
+    }
+    catch(error){
+        return res.status(500).json('Error on server!')
+    }
+})
+
+router.delete('/sessao/delete', async(req, res)=>{
+    try {
+        const {idu,ids} = req.body;
+        console.log(idu,ids)
+            await pool.query`delete from usuario_sessao where id_usuario = ${id} and id_sessao = ${ids}`
+            return res.status(200).json('Cadastrado com sucesso')
+    } catch (error) {
+        
+    }
+})
+
 export default router
